@@ -130,9 +130,6 @@ public class MainActivity extends Activity {
             canvas.drawLine(p2.x, p1.y, p2.x, p2.y, paint);
         }
 
-        // Method for bitmap demo
-        public void bitmapStuff() {
-
-        }
+        //
     } //DrawView
 } //MainActivity
