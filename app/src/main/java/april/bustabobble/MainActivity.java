@@ -34,7 +34,7 @@ public class MainActivity extends Activity {
             // Get the screen size before the main canvas is ready
             DisplayMetrics metrics = new DisplayMetrics();
             getWindowManager().getDefaultDisplay().getMetrics(metrics);
-            screenSize = new Point(metrics.widthPixels, metrics.heightPixels-20);
+            screenSize = new Point(metrics.widthPixels, metrics.heightPixels);
 
             // Create the back buffer
             bufferBitmap = Bitmap.createBitmap(screenSize.x, screenSize.y, Bitmap.Config.ARGB_8888);
@@ -57,26 +57,11 @@ public class MainActivity extends Activity {
         public void drawOnBuffer() {
             Paint paint = new Paint();
             paint.setAntiAlias(true);
-            drawCheckerBoard(paint);
+            drawCheckerBoard(Constants.DARK_TILE, Color.WHITE, paint);
         }
 
-        public void drawStuff(Canvas canvas, Paint paint, Random random) {
-            // Draw some circles with random colors in random locations
-            for (int i = 0; i < 20; i++) {
-                paint.setColor(random.nextInt());
-                canvas.drawCircle(Math.abs(100+random.nextInt())%400, 20+Math.abs(random.nextInt())%400, 50, paint);
-            }
-
-            //Draw a box using Canvas method
-            Point p3 = new Point(50,50);
-            Point p4 = new Point(200,200);
-            paint.setStyle(Paint.Style.STROKE);
-            canvas.drawRect(p3.x, p3.y, p4.x, p4.y, paint);
-        } //drawStuff()
-
-
         // Draw a b
-        public void drawCheckerBoard(Paint paint) {
+        public void drawCheckerBoard(int color1, int color2, Paint paint) {
             //Paint paint = new Paint();
 
             // Clear the buffer with color
@@ -84,21 +69,18 @@ public class MainActivity extends Activity {
 
             // Determine the number of squares on the board
             int NUM_SQUARES_X = 6;
-            int NUM_SQUARES_Y = (int) ((float)screenSize.y/screenSize.x * NUM_SQUARES_X);
+            int NUM_SQUARES_Y = (int) ((float)bufferCanvas.getHeight()/bufferCanvas.getWidth()* NUM_SQUARES_X);
             bufferCanvas.drawText("NUM_SQUARES: " + NUM_SQUARES_X + ", " + NUM_SQUARES_Y, 10, 30, paint);
 
             // Determine square size
             int sideLength = Math.round((float) screenSize.x/NUM_SQUARES_X);
 
-            // Set square colors and set to FILL
-            int color1 = (Color.BLACK);
-            int color2 = (Color.WHITE);
             paint.setStyle(Paint.Style.FILL);
 
 
             // Draw the checker board
             int temp = color1;
-            for (int row = 0; row < NUM_SQUARES_Y; row++) {
+            for (int row = 0; row < NUM_SQUARES_Y + 1; row++) {
                 for (int col = 0; col < NUM_SQUARES_X; col++) {
                     if (col % 2 == 0) {
                         paint.setColor(color1);
