@@ -1,7 +1,6 @@
 package april.bustabobble;
 
 import android.app.Activity;
-import android.app.ActionBar;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.*;
@@ -57,7 +56,7 @@ public class MainActivity extends Activity {
         public void drawOnBuffer() {
             Paint paint = new Paint();
             paint.setAntiAlias(true);
-            drawCheckerBoard(Constants.DARK_TILE, Color.WHITE, paint);
+            drawCheckerBoard(Colors.DARK_TILE, Colors.LIGHT_TILE, paint);
         }
 
         // Draw a b
