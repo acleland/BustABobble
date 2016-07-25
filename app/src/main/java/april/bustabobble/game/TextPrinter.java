@@ -53,4 +53,6 @@ public class TextPrinter {
         p_canvas.drawText(text, p_x, p_y,  p_paint);
         p_y += p_spacing;
     }
+
+
 }

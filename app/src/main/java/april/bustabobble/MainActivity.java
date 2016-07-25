@@ -67,7 +67,7 @@ public class MainActivity extends Activity {
             bufferCanvas.drawColor(Color.WHITE);
 
             // Determine the number of squares on the board
-            int NUM_SQUARES_X = 6;
+            int NUM_SQUARES_X = 10;
             int NUM_SQUARES_Y = (int) ((float)bufferCanvas.getHeight()/bufferCanvas.getWidth()* NUM_SQUARES_X);
             bufferCanvas.drawText("NUM_SQUARES: " + NUM_SQUARES_X + ", " + NUM_SQUARES_Y, 10, 30, paint);
 
