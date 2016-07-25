@@ -1,8 +1,13 @@
-package april.bustabobble.game;
-
-/**
- * Created by Andronius on 7/21/16.
+/** 
+ * Timer Class for Android Game Engine
+ * Teach Yourself Android 4.0 Game Programming in 24 Hours
+ * Copyright (c)2012 by Jonathan S. Harbour
+ * 
+ * This class helps with printing lines of text with auto line
+ * increment and reusable properties.
  */
+
+package april.bustabobble.game.engine;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -13,11 +18,11 @@ public class TextPrinter {
     private Paint p_paint;
     private float p_x, p_y;
     private float p_spacing;
-
+    
     public TextPrinter() {
         this(null);
     }
-
+    
     public TextPrinter(Canvas canvas) {
         p_canvas = canvas;
         p_paint = new Paint();
@@ -26,33 +31,32 @@ public class TextPrinter {
         setTextSize(18);
         setColor(Color.WHITE);
     }
-
+    
     public void setCanvas(Canvas canvas) {
         p_canvas = canvas;
     }
-
+    
     public void setLineSpacing(float spacing) {
         p_spacing = spacing;
     }
-
+    
     public void setTextSize(float size) {
         p_paint.setTextSize(size);
     }
-
+    
     public void setColor(int color) {
         p_paint.setColor(color);
     }
-
+    
     public void draw(String text, float x, float y) {
         p_x = x;
         p_y = y;
         draw(text);
     }
-
+    
     public void draw(String text) {
-        p_canvas.drawText(text, p_x, p_y,  p_paint);
+        p_canvas.drawText(text, p_x, p_y, p_paint);
         p_y += p_spacing;
     }
-
-
 }
+
