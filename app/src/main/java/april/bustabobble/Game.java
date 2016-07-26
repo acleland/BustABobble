@@ -5,7 +5,7 @@ import android.renderscript.*;
 import game.engine.*;
 
 
-public class MainActivity extends game.engine.Engine {
+public class Game extends game.engine.Engine {
     Canvas canvas = null;
     Paint paint = null;
     Random rand = null;
@@ -13,7 +13,7 @@ public class MainActivity extends game.engine.Engine {
     Bitmap bg_pattern = null;
 
 
-    public MainActivity() {
+    public Game() {
         paint = new Paint();
         paint.setColor(Color.RED);
         rand = new Random();

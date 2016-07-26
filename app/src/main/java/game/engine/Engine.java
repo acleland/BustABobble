@@ -1,9 +1,9 @@
 /**
- * Android MainActivity Engine Core Class (FINISHED)
+ * Android Game Engine Core Class (FINISHED)
  * 
  * THIS IS THE *FINAL* H23 REVISION!
  * 
- * Teach Yourself Android 4.0 MainActivity Programming in 24 Hours
+ * Teach Yourself Android 4.0 Game Programming in 24 Hours
  * Copyright (c)2012 by Jonathan S. Harbour
  */
 

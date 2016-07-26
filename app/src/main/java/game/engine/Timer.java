@@ -1,6 +1,6 @@
 /** 
- * Timer Class for Android MainActivity Engine
- * Teach Yourself Android 4.0 MainActivity Programming in 24 Hours
+ * Timer Class for Android Game Engine
+ * Teach Yourself Android 4.0 Game Programming in 24 Hours
  * Copyright (c)2012 by Jonathan S. Harbour
  */
  
