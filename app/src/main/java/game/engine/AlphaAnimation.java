@@ -2,7 +2,7 @@
  * AlphaAnimation Class 
  */
 
-package april.bustabobble.game.engine;
+package game.engine;
 
 public class AlphaAnimation extends Animation {
     private int p_minAlpha;

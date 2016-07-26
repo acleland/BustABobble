@@ -1,7 +1,7 @@
 /** 
  * FrameAnimation Class 
  */
-package april.bustabobble.game.engine;
+package game.engine;
 
 public class FrameAnimation extends Animation {
     private int p_firstFrame;

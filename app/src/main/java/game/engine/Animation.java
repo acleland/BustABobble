@@ -2,7 +2,7 @@
  * Animation Class 
  * Requires game.engine.Engine to build.
  */
-package april.bustabobble.game.engine;
+package game.engine;
 
 import android.renderscript.Float2;
 

@@ -1,7 +1,7 @@
 /** 
  * CirclingBehavior Class
  */
-package april.bustabobble.game.engine;
+package game.engine;
 import android.renderscript.Float2;
 
 public class CirclingBehavior extends Animation {

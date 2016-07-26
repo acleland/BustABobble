@@ -1,7 +1,7 @@
 /** 
  * FenceBehavior Class
  */
-package april.bustabobble.game.engine;
+package game.engine;
 import android.graphics.RectF;
 import android.renderscript.Float2;
 

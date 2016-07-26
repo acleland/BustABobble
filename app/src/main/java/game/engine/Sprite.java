@@ -2,7 +2,7 @@
  * Sprite Class
  * Requires game.engine.Engine to build.
  */
-package april.bustabobble.game.engine;
+package game.engine;
 
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;

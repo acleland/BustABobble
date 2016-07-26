@@ -1,7 +1,7 @@
 /** 
  * SpinAnimation Class
  */
-package april.bustabobble.game.engine;
+package game.engine;
 
 public class SpinAnimation extends Animation {
     private float p_angleDist, p_velocity;

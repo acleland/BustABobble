@@ -1,100 +1,99 @@
 package april.bustabobble;
-
-import android.app.Activity;
-import android.content.Context;
-import android.graphics.Canvas;
-import android.graphics.*;
-import android.os.Bundle;
-import android.util.*;
-import android.view.*;
 import java.util.Random;
+import android.graphics.*;
+import android.renderscript.*;
+import game.engine.*;
 
-public class MainActivity extends Activity {
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        // getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(new DrawView(this));
+public class MainActivity extends game.engine.Engine {
+    Canvas canvas = null;
+    Paint paint = null;
+    Random rand = null;
+    Point touch = null;
+    Bitmap bg_pattern = null;
+
+
+    public MainActivity() {
+        paint = new Paint();
+        paint.setColor(Color.RED);
+        rand = new Random();
+        System.out.println(Engine.TEST);
     }
 
-    public class DrawView extends View {
-        Bitmap bufferBitmap;
-        Canvas bufferCanvas;
-        Point screenSize;
-        Random rand = new Random();
 
+    /*
+    Define Engine Abstract methods
+     */
+    public void init() {
+        setScreenOrientation(ScreenModes.PORTRAIT);
+        setFrameRate(60);
+    }
 
-        public DrawView(Context context) {
-            super(context);
-
-
-            // Get the screen size before the main canvas is ready
-            DisplayMetrics metrics = new DisplayMetrics();
-            getWindowManager().getDefaultDisplay().getMetrics(metrics);
-            screenSize = new Point(metrics.widthPixels, metrics.heightPixels);
-
-            // Create the back buffer
-            bufferBitmap = Bitmap.createBitmap(screenSize.x, screenSize.y, Bitmap.Config.ARGB_8888);
-            bufferCanvas = new Canvas(bufferBitmap);
+    public void load() {
+        int w = getScreenWidth();
+        int h = getScreenHeight();
+        createBackground();
         }
 
+    public void draw() {
+        canvas = getCanvas();
+        canvas.drawBitmap(bg_pattern, 0, 0, paint);
+    }
 
-        @Override
-        public void onDraw(Canvas canvas) {
-            super.onDraw(canvas);
+    public void update() {
 
-            // Fill the back buffer with graphics
-            drawOnBuffer();
+    }
 
-            // copy the back buffer to the screen
-            canvas.drawBitmap(bufferBitmap, 0, 0, new Paint());
+    public void collision(Sprite sprite) {
 
-        } //onDraw()
+    }
 
-        public void drawOnBuffer() {
-            Paint paint = new Paint();
-            paint.setAntiAlias(true);
-            drawCheckerBoard(Colors.DARK_TILE, Colors.LIGHT_TILE, paint);
-        }
+    /*
+    Code for drawing the background
+     */
+    public void createBackground() {
+        int w = getScreenWidth();
+        int h = getScreenHeight();
+        bg_pattern = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888); // Config.ARGB_888  means each pixel is stored on 4 bytes
+        canvas = new Canvas(bg_pattern);
+        drawCheckerBoard(Colors.DARK_TILE, Colors.LIGHT_TILE, canvas, paint);
+    }
 
-        // Draw a b
-        public void drawCheckerBoard(int color1, int color2, Paint paint) {
-            //Paint paint = new Paint();
+    // Draw a b
+    public void drawCheckerBoard(int color1, int color2, Canvas canvas, Paint paint) {
+        //Paint paint = new Paint();
 
-            // Clear the buffer with color
-            bufferCanvas.drawColor(Color.WHITE);
+        // Clear the buffer with color
+        canvas.drawColor(Color.WHITE);
 
-            // Determine the number of squares on the board
-            int NUM_SQUARES_X = 10;
-            int NUM_SQUARES_Y = (int) ((float)bufferCanvas.getHeight()/bufferCanvas.getWidth()* NUM_SQUARES_X);
-            bufferCanvas.drawText("NUM_SQUARES: " + NUM_SQUARES_X + ", " + NUM_SQUARES_Y, 10, 30, paint);
+        // Determine the number of squares on the board
+        int NUM_SQUARES_X = 10;
+        int NUM_SQUARES_Y = (int) ((float)canvas.getHeight()/canvas.getWidth()* NUM_SQUARES_X);
+        canvas.drawText("NUM_SQUARES: " + NUM_SQUARES_X + ", " + NUM_SQUARES_Y, 10, 30, paint);
 
-            // Determine square size
-            int sideLength = Math.round((float) screenSize.x/NUM_SQUARES_X);
+        // Determine square size
+        int sideLength = Math.round((float) canvas.getWidth()/NUM_SQUARES_X);
 
-            paint.setStyle(Paint.Style.FILL);
+        paint.setStyle(Paint.Style.FILL);
 
 
-            // Draw the checker board
-            int temp = color1;
-            for (int row = 0; row < NUM_SQUARES_Y + 1; row++) {
-                for (int col = 0; col < NUM_SQUARES_X; col++) {
-                    if (col % 2 == 0) {
-                        paint.setColor(color1);
-                    }
-                    else {
-                        paint.setColor(color2);
-                    }
-                    bufferCanvas.drawRect(col*sideLength, row*sideLength, col*sideLength + sideLength, row*sideLength + sideLength, paint);
+        // Draw the checker board
+        int temp = color1;
+        for (int row = 0; row < NUM_SQUARES_Y + 1; row++) {
+            for (int col = 0; col < NUM_SQUARES_X; col++) {
+                if (col % 2 == 0) {
+                    paint.setColor(color1);
                 }
-                // Swap starting color on new row.
-                temp = color1;
-                color1 = color2;
-                color2 = temp;
+                else {
+                    paint.setColor(color2);
+                }
+                canvas.drawRect(col*sideLength, row*sideLength, col*sideLength + sideLength, row*sideLength + sideLength, paint);
             }
-        } // drawCheckerBoard()
+            // Swap starting color on new row.
+            temp = color1;
+            color1 = color2;
+            color2 = temp;
+        }
+    } // drawCheckerBoard()
 
-    } //DrawView
-} //MainActivity
+}

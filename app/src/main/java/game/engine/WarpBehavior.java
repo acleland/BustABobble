@@ -2,7 +2,7 @@
  * WarpBehavior class - derived from Animation 
  * Requires game.engine.Engine to build.
  */
-package april.bustabobble.game.engine;
+package game.engine;
 
 import android.graphics.Point;
 import android.graphics.RectF;

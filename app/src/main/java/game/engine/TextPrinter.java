@@ -1,13 +1,13 @@
 /** 
- * Timer Class for Android Game Engine
- * Teach Yourself Android 4.0 Game Programming in 24 Hours
+ * Timer Class for Android MainActivity Engine
+ * Teach Yourself Android 4.0 MainActivity Programming in 24 Hours
  * Copyright (c)2012 by Jonathan S. Harbour
  * 
  * This class helps with printing lines of text with auto line
  * increment and reusable properties.
  */
 
-package april.bustabobble.game.engine;
+package game.engine;
 
 import android.graphics.Canvas;
 import android.graphics.Color;

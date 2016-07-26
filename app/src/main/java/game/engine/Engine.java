@@ -1,13 +1,13 @@
 /**
- * Android Game Engine Core Class (FINISHED)
+ * Android MainActivity Engine Core Class (FINISHED)
  * 
  * THIS IS THE *FINAL* H23 REVISION!
  * 
- * Teach Yourself Android 4.0 Game Programming in 24 Hours
+ * Teach Yourself Android 4.0 MainActivity Programming in 24 Hours
  * Copyright (c)2012 by Jonathan S. Harbour
  */
 
-package april.bustabobble.game.engine;
+package game.engine;
 
 import android.app.Activity;
 import android.content.pm.ActivityInfo;
@@ -49,6 +49,7 @@ public abstract class Engine extends Activity implements Runnable, OnTouchListen
     private long p_preferredFrameRate, p_sleepTime;
     private Point p_screenSize;
     private LinkedList<Sprite> p_group;
+    public static final int TEST = 250;
     
     /**
      * Engine constructor
