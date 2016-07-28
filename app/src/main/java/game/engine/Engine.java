@@ -50,6 +50,7 @@ public abstract class Engine extends Activity implements Runnable, OnTouchListen
     private Point p_screenSize;
     private LinkedList<Sprite> p_group;
     public static final int TEST = 250;
+    private boolean debug = true;
     
     /**
      * Engine constructor
@@ -70,7 +71,16 @@ public abstract class Engine extends Activity implements Runnable, OnTouchListen
         p_pauseCount = 0;
         p_group = new LinkedList<Sprite>();
     }
-    
+    /**
+     * Debug settings
+     */
+    public boolean debugging() {
+        return debug;
+    }
+    public void setDebug(boolean b) {
+        debug = b;
+    }
+
     /**
      * Abstract methods that must be implemented in the sub-class!
      */
@@ -246,15 +256,22 @@ public abstract class Engine extends Activity implements Runnable, OnTouchListen
                 /**
                  * Print some engine debug info.
                  */
-                int x = p_canvas.getWidth()-150;
-                p_canvas.drawText("ENGINE", x, 20, p_paintFont);
-                p_canvas.drawText(toString(frameRate) + " FPS", x, 40, 
-                    p_paintFont);
-                p_canvas.drawText("Pauses: " + toString(p_pauseCount), 
-                    x, 60, p_paintFont);
-                
+                if (debugging()) {
+                    int temp = p_paintFont.getColor();
+                    p_paintFont.setColor(Color.RED);
+                    int x = p_canvas.getWidth()-150;
+                    p_canvas.drawText("ENGINE", x, 20, p_paintFont);
+                    p_canvas.drawText(toString(frameRate) + " FPS", x, 40,
+                        p_paintFont);
+                    p_canvas.drawText("Pauses: " + toString(p_pauseCount),
+                        x, 60, p_paintFont);
+                    p_paintFont.setColor(temp);
+                }
+
                 // done drawing
                 endDrawing();
+
+
             }
             
             /*
@@ -576,6 +593,8 @@ public abstract class Engine extends Activity implements Runnable, OnTouchListen
                 B.getBoundsScaled()); 
         return test;
     }
+
+
     
 } 
 

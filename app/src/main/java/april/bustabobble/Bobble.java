@@ -1,5 +1,8 @@
 package april.bustabobble;
 
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.graphics.Point;
 
 /**
@@ -9,6 +12,20 @@ public class Bobble {
     public static final int RADIUS = 40;
     private int color = Colors.TRANS_PINK;
     private Point loc = new Point(0,0);
+
+    /**
+     * Make bobble bitmaps
+     */
+    public static Bitmap createBitmap(int color) {
+        Bitmap b = Bitmap.createBitmap(2*RADIUS, 2*RADIUS, Bitmap.Config.ARGB_8888);
+        Canvas buffer = new Canvas(b);
+        Paint paint = new Paint();
+        paint.setColor(color);
+        buffer.drawCircle(RADIUS, RADIUS, RADIUS, paint);
+        return b;
+    }
+
+
 
     public Bobble(int x, int y, int color) {
         loc.x = x;

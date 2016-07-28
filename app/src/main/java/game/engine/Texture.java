@@ -26,6 +26,10 @@ public class Texture {
     public Bitmap getBitmap() {
         return p_bitmap;
     }
+
+    public void setBitmap(Bitmap b) {
+        p_bitmap = b;
+    }
     
     public boolean loadFromAsset(String filename) {
         InputStream istream=null;
@@ -40,6 +44,7 @@ public class Texture {
         }
         return true;
     }
-    
+
+
 }
 

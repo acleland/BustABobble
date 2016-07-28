@@ -12,14 +12,11 @@ public class Game extends game.engine.Engine {
     Point touch = null;
     Bitmap bg_pattern = null;
 
-
     public Game() {
         paint = new Paint();
         paint.setColor(Color.RED);
         rand = new Random();
-        System.out.println(Engine.TEST);
     }
-
 
     /*
     Define Engine Abstract methods
@@ -33,11 +30,15 @@ public class Game extends game.engine.Engine {
         int w = getScreenWidth();
         int h = getScreenHeight();
         createBackground();
-        }
+
+
+
+    }
 
     public void draw() {
         canvas = getCanvas();
         canvas.drawBitmap(bg_pattern, 0, 0, paint);
+        canvas.drawBitmap(Bobble.createBitmap(Colors.TRANS_PINK), getScreenWidth()/2, getScreenHeight()/2, paint);
     }
 
     public void update() {
@@ -56,6 +57,7 @@ public class Game extends game.engine.Engine {
         int h = getScreenHeight();
         bg_pattern = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888); // Config.ARGB_888  means each pixel is stored on 4 bytes
         canvas = new Canvas(bg_pattern);
+        paint.setAntiAlias(true);
         drawCheckerBoard(Colors.DARK_TILE, Colors.LIGHT_TILE, canvas, paint);
     }
 
@@ -95,5 +97,7 @@ public class Game extends game.engine.Engine {
             color2 = temp;
         }
     } // drawCheckerBoard()
+
+
 
 }
