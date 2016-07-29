@@ -11,6 +11,7 @@ public class Game extends game.engine.Engine {
     Random rand = null;
     Point touch = null;
     Bitmap bg_pattern = null;
+    Bobble testBobble = null;
 
     public Game() {
         paint = new Paint();
@@ -30,22 +31,25 @@ public class Game extends game.engine.Engine {
         float w = (float) getScreenWidth();
         float h = (float) getScreenHeight();
         createBackground();
-        Bobble b = new Bobble(this, Colors.TRANS_GREEN, new Float2(w/2, h/2));
-        addToGroup(b);
-        b.setVelocity(new Float2(0, 6));
-
+        testBobble = new Bobble(this, Colors.TRANS_GREEN, new Float2(w/2, h/2));
+        addToGroup(testBobble);
 
     }
 
     public void draw() {
         canvas = getCanvas();
-
         canvas.drawBitmap(bg_pattern, 0, 0, paint);
-        //canvas.drawBitmap(Bobble.makeBitmap(Colors.TRANS_PINK), getScreenWidth()/2, getScreenHeight()/2, paint);
     }
 
     public void update() {
-
+        int inputs = getTouchInputs();
+        if (inputs > 0) {
+            touch = getTouchPoint(0);
+            {
+                testBobble.position.x = touch.x - testBobble.getWidth()/2;
+                testBobble.position.y = touch.y - 50;
+            }
+        }
     }
 
     public void collision(Sprite sprite) {

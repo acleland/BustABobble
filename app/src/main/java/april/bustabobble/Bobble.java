@@ -12,12 +12,13 @@ import game.engine.Texture;
  * Created by Andronius on 7/20/16.
  */
 public class Bobble extends game.engine.Sprite {
-    public static final int RADIUS = 40;
+    public static final int RADIUS = 80;
     public static int color;
 
     public Bobble(Engine engine, int color) {
         super(engine, 2*RADIUS, 2*RADIUS, 1);
         this.setTexture(new Texture(engine, makeBitmap(color)));
+        this.setCollidable(true);
     }
 
     public Bobble(Engine engine, int color, Float2 pos) {

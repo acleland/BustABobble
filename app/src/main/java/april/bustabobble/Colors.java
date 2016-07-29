@@ -3,7 +3,7 @@ import android.graphics.Color;
 
 public class Colors {
 	// Transparency setting
-    public static final int ALPHA = 100;
+    public static final int ALPHA = 200;
 
     // Solid colors for background
     public static final int CREAMY = Color.argb(255, 255, 241, 224);
