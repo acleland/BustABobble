@@ -3,20 +3,29 @@ package april.bustabobble;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.Point;
+import android.renderscript.Float2;
+
+import game.engine.Engine;
+import game.engine.Texture;
 
 /**
  * Created by Andronius on 7/20/16.
  */
-public class Bobble {
+public class Bobble extends game.engine.Sprite {
     public static final int RADIUS = 40;
-    private int color = Colors.TRANS_PINK;
-    private Point loc = new Point(0,0);
+    public static int color;
 
-    /**
-     * Make bobble bitmaps
-     */
-    public static Bitmap createBitmap(int color) {
+    public Bobble(Engine engine, int color) {
+        super(engine, 2*RADIUS, 2*RADIUS, 1);
+        this.setTexture(new Texture(engine, makeBitmap(color)));
+    }
+
+    public Bobble(Engine engine, int color, Float2 pos) {
+        this(engine, color);
+        this.setPosition(pos);
+    }
+
+    public static Bitmap makeBitmap(int color) {
         Bitmap b = Bitmap.createBitmap(2*RADIUS, 2*RADIUS, Bitmap.Config.ARGB_8888);
         Canvas buffer = new Canvas(b);
         Paint paint = new Paint();
@@ -25,33 +34,4 @@ public class Bobble {
         return b;
     }
 
-
-
-    public Bobble(int x, int y, int color) {
-        loc.x = x;
-        loc.y = y;
-        this.color = color;
-    }
-
-    public int getColor() {
-        return color;
-    }
-
-    public Point getLoc() {
-        return loc;
-    }
-
-    public void setLoc(int x, int y) {
-        loc.x = x;
-        loc.y = y;
-    }
-
-    public void setColor(int color) {
-        this.color = color;
-    }
-
-    public void move(int dx, int dy) {
-        loc.x += dx;
-        loc.y += dy;
-    }
 }

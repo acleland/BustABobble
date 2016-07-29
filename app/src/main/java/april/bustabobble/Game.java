@@ -27,18 +27,21 @@ public class Game extends game.engine.Engine {
     }
 
     public void load() {
-        int w = getScreenWidth();
-        int h = getScreenHeight();
+        float w = (float) getScreenWidth();
+        float h = (float) getScreenHeight();
         createBackground();
-
+        Bobble b = new Bobble(this, Colors.TRANS_GREEN, new Float2(w/2, h/2));
+        addToGroup(b);
+        b.setVelocity(new Float2(0, 6));
 
 
     }
 
     public void draw() {
         canvas = getCanvas();
+
         canvas.drawBitmap(bg_pattern, 0, 0, paint);
-        canvas.drawBitmap(Bobble.createBitmap(Colors.TRANS_PINK), getScreenWidth()/2, getScreenHeight()/2, paint);
+        //canvas.drawBitmap(Bobble.makeBitmap(Colors.TRANS_PINK), getScreenWidth()/2, getScreenHeight()/2, paint);
     }
 
     public void update() {
@@ -98,6 +101,19 @@ public class Game extends game.engine.Engine {
         }
     } // drawCheckerBoard()
 
+    public static enum BobbleColor {
+        RED(Colors.TRANS_RED),
+        ORANGE(Colors.TRANS_ORANGE),
+        YELLOW(Colors.TRANS_YELLOW),
+        GREEN(Colors.TRANS_GREEN),
+        BLUE(Colors.TRANS_BLUE),
+        PURPLE(Colors.TRANS_PURPLE),
+        PINK(Colors.TRANS_PINK);
 
+        private int color;
+        BobbleColor(int c) {
+            this.color = c;
+        }
+    }
 
 }

@@ -22,7 +22,12 @@ public class Texture {
         p_context = context;
         p_bitmap = null;
     }
-    
+
+    public Texture(Context context, Bitmap bitmap) {
+        this(context);
+        p_bitmap = bitmap;
+    }
+
     public Bitmap getBitmap() {
         return p_bitmap;
     }
