@@ -10,8 +10,10 @@ public class Game extends game.engine.Engine {
     Paint paint = null;
     Random rand = null;
     Point touch = null;
+    int score = 0;
     Bitmap bg_pattern = null;
     Bobble testBobble = null;
+    Bobble testBobble2 = null;
 
     public Game() {
         paint = new Paint();
@@ -31,14 +33,27 @@ public class Game extends game.engine.Engine {
         float w = (float) getScreenWidth();
         float h = (float) getScreenHeight();
         createBackground();
+
+        // Init testBobble1
         testBobble = new Bobble(this, Colors.TRANS_GREEN, new Float2(w/2, h/2));
         addToGroup(testBobble);
+
+        // Init testBobble2
+        testBobble2 = new Bobble(this, Colors.TRANS_PINK, new Float2(w/3, h/4));
+        testBobble2.setVelocity(new Float2(4.0f,-6.0f));
+        Point size = testBobble2.getSize();
+        testBobble2.addAnimation(new ReboundBehavior(
+                new RectF(0,0, w, h),
+                size, testBobble2.getVelocity()) );
+        addToGroup(testBobble2);
 
     }
 
     public void draw() {
         canvas = getCanvas();
         canvas.drawBitmap(bg_pattern, 0, 0, paint);
+
+        drawText("SCORE" + toString(score), 0, 20);
     }
 
     public void update() {
