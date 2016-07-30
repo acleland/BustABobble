@@ -12,7 +12,7 @@ import game.engine.Texture;
  * Created by Andronius on 7/20/16.
  */
 public class Bobble extends game.engine.Sprite {
-    public static final int RADIUS = 80;
+    private static int RADIUS = 80;
     public static int color;
 
     public Bobble(Engine engine, int color) {
@@ -33,6 +33,10 @@ public class Bobble extends game.engine.Sprite {
         paint.setColor(color);
         buffer.drawCircle(RADIUS, RADIUS, RADIUS, paint);
         return b;
+    }
+
+    public static void setRADIUS(int R) {
+        RADIUS = R;
     }
 
 }

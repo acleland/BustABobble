@@ -10,10 +10,13 @@ public class Game extends game.engine.Engine {
     Paint paint = null;
     Random rand = null;
     Point touch = null;
-    int score = 0;
     Bitmap bg_pattern = null;
     Bobble testBobble = null;
     Bobble testBobble2 = null;
+    public final int NUM_SQUARES_X = 10;
+    public int NUM_SQUARES_Y;
+    public int SIDELENGTH;
+    private int score = 0;
 
     public Game() {
         paint = new Paint();
@@ -32,6 +35,12 @@ public class Game extends game.engine.Engine {
     public void load() {
         float w = (float) getScreenWidth();
         float h = (float) getScreenHeight();
+
+        // Determine square size, also bobble size!
+        NUM_SQUARES_Y = (int) (h/w * NUM_SQUARES_X);
+        SIDELENGTH = Math.round(w/NUM_SQUARES_X);
+        Bobble.setRADIUS(Math.round((float) SIDELENGTH / 2));
+
         createBackground();
 
         // Init testBobble1
@@ -90,13 +99,6 @@ public class Game extends game.engine.Engine {
         // Clear the buffer with color
         canvas.drawColor(Color.WHITE);
 
-        // Determine the number of squares on the board
-        int NUM_SQUARES_X = 10;
-        int NUM_SQUARES_Y = (int) ((float)canvas.getHeight()/canvas.getWidth()* NUM_SQUARES_X);
-        canvas.drawText("NUM_SQUARES: " + NUM_SQUARES_X + ", " + NUM_SQUARES_Y, 10, 30, paint);
-
-        // Determine square size
-        int sideLength = Math.round((float) canvas.getWidth()/NUM_SQUARES_X);
 
         paint.setStyle(Paint.Style.FILL);
 
@@ -111,7 +113,7 @@ public class Game extends game.engine.Engine {
                 else {
                     paint.setColor(color2);
                 }
-                canvas.drawRect(col*sideLength, row*sideLength, col*sideLength + sideLength, row*sideLength + sideLength, paint);
+                canvas.drawRect(col*SIDELENGTH, row*SIDELENGTH, col*SIDELENGTH + SIDELENGTH, row*SIDELENGTH + SIDELENGTH, paint);
             }
             // Swap starting color on new row.
             temp = color1;
