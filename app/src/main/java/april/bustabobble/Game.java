@@ -17,6 +17,7 @@ public class Game extends game.engine.Engine {
     public int NUM_SQUARES_Y;
     public int SIDELENGTH;
     private int score = 0;
+    Cannon cannon = null;
 
     public Game() {
         paint = new Paint();
@@ -40,6 +41,7 @@ public class Game extends game.engine.Engine {
         NUM_SQUARES_Y = (int) (h/w * NUM_SQUARES_X);
         SIDELENGTH = Math.round(w/NUM_SQUARES_X);
         Bobble.setRADIUS(Math.round((float) SIDELENGTH / 2));
+        Cannon.setLENGTH(7*Bobble.getRADIUS());
 
         createBackground();
 
@@ -55,6 +57,15 @@ public class Game extends game.engine.Engine {
                 new RectF(0,0, w, h),
                 size, testBobble2.getVelocity()) );
         addToGroup(testBobble2);
+
+        // Init Cannon
+        cannon = new Cannon(this);
+        cannon.setPosition(
+                new Float2(getScreenWidth()/2 - cannon.getWidth()/2,
+                        getScreenHeight() - cannon.getHeight() - 2*Bobble.getRADIUS())
+        );
+        cannon.addAnimation(new SpinAnimation(4.0f));
+        addToGroup(cannon);
 
     }
 
@@ -134,6 +145,14 @@ public class Game extends game.engine.Engine {
         private int color;
         BobbleColor(int c) {
             this.color = c;
+        }
+    }
+
+    public void onPress() {
+        int inputs = getTouchInputs();
+        if (inputs > 0) {
+            Point touch = getTouchPoint(0);
+
         }
     }
 

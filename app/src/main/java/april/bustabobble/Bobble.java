@@ -39,4 +39,8 @@ public class Bobble extends game.engine.Sprite {
         RADIUS = R;
     }
 
+    public static int getRADIUS() {
+        return RADIUS;
+    }
+
 }
