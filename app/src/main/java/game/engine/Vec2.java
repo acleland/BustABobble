@@ -1,6 +1,7 @@
 package game.engine;
 
 import android.renderscript.Float2;
+import android.graphics.Point;
 
 /**
  * Created by Andronius on 7/30/16.
@@ -17,6 +18,16 @@ public class Vec2 {
     public Vec2(Float2 v) {
         x = v.x;
         y = v.y;
+    }
+
+    public Vec2(Point p) {
+        x = (float) p.x;
+        y = (float) p.y;
+    }
+
+    public Vec2(int x, int y) {
+        this.x = (float) x;
+        this.y = (float) y;
     }
 
     public Vec2 plus(Vec2 v) {
@@ -47,7 +58,12 @@ public class Vec2 {
         return (float) Math.acos(this.cosAngle(v));
     }
 
+    public Point toPoint() {
+        return new Point(Math.round(x), Math.round(y));
+    }
 
-
+    public Float2 toFloat2() {
+        return new Float2(x, y);
+    }
 
 }

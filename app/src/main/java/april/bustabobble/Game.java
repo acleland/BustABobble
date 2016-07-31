@@ -64,7 +64,10 @@ public class Game extends game.engine.Engine {
                 new Float2(getScreenWidth()/2 - cannon.getWidth()/2,
                         getScreenHeight() - cannon.getHeight() - 2*Bobble.getRADIUS())
         );
-        cannon.addAnimation(new SpinAnimation(4.0f));
+        Float2 center = cannon.getPosition();
+        center.x += cannon.getWidth()/2;
+        center.y += cannon.getHeight()/2;
+        cannon.addAnimation(new CirclingBehavior((int)center.x, (int)center.y, cannon.getHeight()/2, 0, 0.1f));
         addToGroup(cannon);
 
     }
@@ -80,10 +83,7 @@ public class Game extends game.engine.Engine {
         int inputs = getTouchInputs();
         if (inputs > 0) {
             touch = getTouchPoint(0);
-            {
-                testBobble.position.x = touch.x - testBobble.getWidth()/2;
-                testBobble.position.y = touch.y - 50;
-            }
+            onPress(touch);
         }
     }
 
@@ -148,11 +148,30 @@ public class Game extends game.engine.Engine {
         }
     }
 
-    public void onPress() {
+    public void onPress(Point touch) {
+        rotateCannon(touch);
+    }
+
+    public void rotateCannon(Point touch) {
+        float r = cannon.getRotation();
+        float dr = .1f;
+        if (touch.x < getScreenWidth()/2) {
+            cannon.setRotation(r - dr);
+        }
+        else {
+            cannon.setRotation(r + dr);
+        }
+
+    }
+
+    public void moveBobbleOnTouch(Bobble testBobble) {
         int inputs = getTouchInputs();
         if (inputs > 0) {
-            Point touch = getTouchPoint(0);
-
+            touch = getTouchPoint(0);
+            {
+                testBobble.position.x = touch.x - testBobble.getWidth()/2;
+                testBobble.position.y = touch.y - 50;
+            }
         }
     }
 

@@ -16,6 +16,7 @@ public class Cannon extends game.engine.Sprite {
     private static int LENGTH = 200;
     private static int color = Color.BLACK;
 
+
     public Cannon(Engine engine) {
         super(engine, LENGTH/2, LENGTH, 1);
         this.setTexture(new Texture(engine, makeBitmap(color)));
