@@ -5,44 +5,44 @@ import android.graphics.Point;
 /**
  * Created by Andronius on 7/30/16.
  */
-public class Float2 {
+public class Vec2 {
     public float x;
     public float y;
 
-    public Float2(float x, float y) {
+    public Vec2(float x, float y) {
         this.x = x;
         this.y = y;
     }
 
-    public Float2(android.renderscript.Float2 v) {
+    public Vec2(android.renderscript.Float2 v) {
         x = v.x;
         y = v.y;
     }
 
-    public Float2(Point p) {
+    public Vec2(Point p) {
         x = (float) p.x;
         y = (float) p.y;
     }
 
-    public Float2(int x, int y) {
+    public Vec2(int x, int y) {
         this.x = (float) x;
         this.y = (float) y;
     }
 
-    public Float2 plus(Float2 v) {
-        return new Float2(x+v.x, y+v.y);
+    public Vec2 plus(Vec2 v) {
+        return new Vec2(x+v.x, y+v.y);
     }
 
-    public Float2 minus(Float2 v) {
-        return new Float2(x-v.x, y-v.y);
+    public Vec2 minus(Vec2 v) {
+        return new Vec2(x-v.x, y-v.y);
     }
 
-    public float dot(Float2 v) {
+    public float dot(Vec2 v) {
         return (x*v.x + y*v.y);
     }
 
-    public Float2 times(float scalar) {
-        return new Float2(this.x * scalar, this.y * scalar);
+    public Vec2 times(float scalar) {
+        return new Vec2(this.x * scalar, this.y * scalar);
     }
 
     public float mag() {
@@ -53,11 +53,11 @@ public class Float2 {
         return x*x + y*y;
     }
 
-    public float cosAngle(Float2 v) {
+    public float cosAngle(Vec2 v) {
         return this.dot(v)/(this.mag()*v.mag());
     }
 
-    public float getAngle(Float2 v) {
+    public float getAngle(Vec2 v) {
         return (float) Math.acos(this.cosAngle(v));
     }
 

@@ -20,7 +20,7 @@ public class Animation {
         return original;
     }
     
-    public Float2 adjustScale(Float2 original) {
+    public Vec2 adjustScale(Vec2 original) {
         return original;
     }
     
@@ -28,11 +28,11 @@ public class Animation {
         return original;        
     }
 
-    public Float2 adjustPosition(Float2 original) {
+    public Vec2 adjustPosition(Vec2 original) {
         return original;
     }
     
-    public Float2 adjustVelocity(Float2 original) {
+    public Vec2 adjustVelocity(Vec2 original) {
         return original;
     }
     

@@ -9,14 +9,14 @@ import android.graphics.RectF;
 
 public class WarpBehavior extends Animation {
     private RectF p_bounds;
-    private Float2 p_velocity;
+    private Vec2 p_velocity;
     private Point p_size;
     
-    public WarpBehavior(RectF bounds, int w, int h, Float2 velocity) {
+    public WarpBehavior(RectF bounds, int w, int h, Vec2 velocity) {
         this(bounds, new Point(w,h), velocity);
     }
     
-    public WarpBehavior(RectF bounds, Point size, Float2 velocity) {
+    public WarpBehavior(RectF bounds, Point size, Vec2 velocity) {
         animating = true;
         p_bounds = bounds;
         p_velocity = velocity;
@@ -24,8 +24,8 @@ public class WarpBehavior extends Animation {
     }
     
     @Override
-    public Float2 adjustPosition(Float2 original) {
-        Float2 modified = original;
+    public Vec2 adjustPosition(Vec2 original) {
+        Vec2 modified = original;
         modified.x += p_velocity.x;
         modified.y += p_velocity.y;
         

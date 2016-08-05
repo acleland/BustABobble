@@ -5,36 +5,36 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
 
-import game.engine.Float2;
+import game.engine.Vec2;
 
 /**
  * Created by Andronius on 7/30/16.
  */
 public class Cannon {
     public static int RADIUS;
-    public Float2 center;
+    public Vec2 center;
     public float angle = 0.0f;
-    public Float2 direction;
+    public Vec2 direction;
     public static int color = Color.BLACK;
-    public static final Float2 vertical = new Float2(0, -1);
+    public static final Vec2 vertical = new Vec2(0, -1);
     private Game engine;
     private Bobble bobble = null;
 
     public static float cos(float theta) {return (float) Math.cos(theta);}
     public static float sin(float theta) {return (float) Math.sin(theta);}
 
-    public Cannon (Game e, Float2 center) {
+    public Cannon (Game e, Vec2 center) {
         this.center = center;
         this.engine = e;
-        this.direction = new Float2(0, -1);
+        this.direction = new Vec2(0, -1);
 
     }
 
     public void load(Bobble b) {
         bobble = b;
-        Float2 offset = new Float2(b.getSize()).times(-.5f);
+        Vec2 offset = new Vec2(b.getSize()).times(-.5f);
         bobble.setPosition(this.center.plus(offset));
-        bobble.setVelocity(new Float2(0,0));
+        bobble.setVelocity(new Vec2(0,0));
         engine.initNextBobble();
     }
 

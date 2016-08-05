@@ -3,7 +3,7 @@ import java.util.Random;
 import android.graphics.*;
 
 import game.engine.*;
-import game.engine.Float2;
+import game.engine.Vec2;
 
 
 public class Game extends game.engine.Engine {
@@ -63,8 +63,8 @@ public class Game extends game.engine.Engine {
         }
 
         // Init testBobble2
-        testBobble2 = new Bobble(this, Colors.TRANS_PINK, new Float2(w/3, h/4));
-        testBobble2.setVelocity(new Float2(4.0f,-6.0f));
+        testBobble2 = new Bobble(this, Colors.TRANS_PINK, new Vec2(w/3, h/4));
+        testBobble2.setVelocity(new Vec2(4.0f,-6.0f));
         Point size = testBobble2.getSize();
         testBobble2.addAnimation(new ReboundBehavior(new RectF(frame),
                 size, testBobble2.getVelocity()) );
@@ -74,7 +74,7 @@ public class Game extends game.engine.Engine {
         initNextBobble();
 
         // Init Cannon
-        cannon = new Cannon(this, new Float2(frame.centerX(), frame.bottom - Cannon.RADIUS));
+        cannon = new Cannon(this, new Vec2(frame.centerX(), frame.bottom - Cannon.RADIUS));
         cannon.load(nextBobble);
     }
 
@@ -173,13 +173,13 @@ public class Game extends game.engine.Engine {
     public void initNextBobble() {
         nextBobble = getNextBobble();
         Point size = nextBobble.getSize();
-        nextBobble.setPosition(new Float2((frame.left + frame.centerX())/2, frame.bottom - Bobble.getRADIUS()));
+        nextBobble.setPosition(new Vec2((frame.left + frame.centerX())/2, frame.bottom - Bobble.getRADIUS()));
         addToGroup(nextBobble);
 
     }
 
     public void rotateCannon(Point touch) {
-        Float2 v_touch = (new Float2(touch.x, touch.y)).minus(cannon.center);
+        Vec2 v_touch = (new Vec2(touch.x, touch.y)).minus(cannon.center);
         cannon.direction = v_touch.times(1/v_touch.mag());
     }
 

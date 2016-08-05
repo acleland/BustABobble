@@ -559,7 +559,7 @@ public abstract class Engine extends Activity implements Runnable, OnTouchListen
         return Double.toString(value);
     }
     
-    public String toString(Float2 value) {
+    public String toString(Vec2 value) {
         String s = "X:" + round(value.x) + "," +
             "Y:" + round(value.y);
         return s;
@@ -573,8 +573,8 @@ public abstract class Engine extends Activity implements Runnable, OnTouchListen
     }
     
     public String toString(Point value) {
-        Float2 f = new Float2(value.x,value.y);
-        return toString((Float2)f);
+        Vec2 f = new Vec2(value.x,value.y);
+        return toString((Vec2)f);
     }
     
     public String toString(Rect value) {

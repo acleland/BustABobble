@@ -22,13 +22,13 @@ public class Sprite {
     private Canvas p_canvas;
     private Texture p_texture;
     private Paint p_paint;
-    public Float2 position;
+    public Vec2 position;
     private int p_width, p_height;
     private int p_columns;
     private int p_alpha;
     private LinkedList<Animation> p_anims;
     private int p_frame; 
-    private Float2 p_scale;
+    private Vec2 p_scale;
     private float p_rotation;
     private Matrix p_mat_translate;
     private Matrix p_mat_scale;
@@ -40,7 +40,7 @@ public class Sprite {
     private Sprite p_offender;
     private String p_name;
     private int p_identifier;
-    private Float2 p_velocity;
+    private Vec2 p_velocity;
     private boolean p_alive;
     
 
@@ -58,9 +58,9 @@ public class Sprite {
         p_alpha = 255;
         p_paint = new Paint();
         p_anims = new LinkedList<Animation>();
-        position = new Float2(0,0);
+        position = new Vec2(0,0);
         p_frame = 0;
-        p_scale = new Float2(1.0f,1.0f);
+        p_scale = new Vec2(1.0f,1.0f);
         p_rotation = 0.0f;
         p_mat_translate = new Matrix();
         p_mat_scale = new Matrix();
@@ -72,7 +72,7 @@ public class Sprite {
         p_offender = null;
         p_name = "";
         p_identifier = 0;
-        p_velocity = new Float2(0,0);
+        p_velocity = new Vec2(0,0);
         p_alive = true; 
     }
     
@@ -201,11 +201,11 @@ public class Sprite {
         return p_texture;
     }
 
-    public void setPosition(Float2 position) {
+    public void setPosition(Vec2 position) {
         this.position = position;
     }
 
-    public Float2 getPosition() {
+    public Vec2 getPosition() {
         return position;
     }
     
@@ -237,16 +237,16 @@ public class Sprite {
         p_frame = frame;
     }
     
-    public Float2 getScale() {
+    public Vec2 getScale() {
         return p_scale;
     }
     
-    public void setScale(Float2 scale) {
+    public void setScale(Vec2 scale) {
         p_scale = scale;
     }
     
     public void setScale(float scale) {
-        p_scale = new Float2(scale,scale);
+        p_scale = new Vec2(scale,scale);
     }
     
     public float getRotation() {
@@ -310,11 +310,11 @@ public class Sprite {
         return r;
     }
     
-    public Float2 getVelocity() {
+    public Vec2 getVelocity() {
         return p_velocity;
     }
     
-    public void setVelocity(Float2 value) {
+    public void setVelocity(Vec2 value) {
         p_velocity = value;
     }
     

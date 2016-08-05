@@ -13,8 +13,8 @@ public class FenceBehavior extends Animation {
     }
     
     @Override
-    public Float2 adjustPosition(Float2 original) {
-        Float2 modified = original;
+    public Vec2 adjustPosition(Vec2 original) {
+        Vec2 modified = original;
         
         if (modified.x < p_fence.left)
             modified.x = p_fence.left;

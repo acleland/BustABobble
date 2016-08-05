@@ -22,8 +22,8 @@ public class ThrobAnimation extends Animation {
     }
     
     @Override
-    public Float2 adjustScale(Float2 original) {
-        Float2 modified = original;
+    public Vec2 adjustScale(Vec2 original) {
+        Vec2 modified = original;
         if (!p_started) {
             modified.x = p_startScale;
             modified.y = p_startScale;

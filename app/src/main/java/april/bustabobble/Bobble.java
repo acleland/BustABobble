@@ -5,7 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 
 import game.engine.Engine;
-import game.engine.Float2;
+import game.engine.Vec2;
 import game.engine.Texture;
 
 /**
@@ -21,7 +21,7 @@ public class Bobble extends game.engine.Sprite {
         this.setCollidable(true);
     }
 
-    public Bobble(Engine engine, int color, Float2 pos) {
+    public Bobble(Engine engine, int color, Vec2 pos) {
         this(engine, color);
         this.setPosition(pos);
     }

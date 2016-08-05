@@ -28,8 +28,8 @@ public class VelocityBehavior extends Animation {
     }
     
     @Override
-    public Float2 adjustPosition(Float2 original) {
-        Float2 modified = new Float2(original.x,original.y);
+    public Vec2 adjustPosition(Vec2 original) {
+        Vec2 modified = new Vec2(original.x,original.y);
         modified.x +=  p_velX;
         modified.y += p_velY;
         return modified;
