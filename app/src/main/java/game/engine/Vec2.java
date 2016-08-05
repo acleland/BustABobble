@@ -42,6 +42,10 @@ public class Vec2 {
         return (x*v.x + y*v.y);
     }
 
+    public Vec2 times(float scalar) {
+        return new Vec2(this.x * scalar, this.y * scalar);
+    }
+
     public float mag() {
         return (float) Math.sqrt(x*x + y*y);
     }
@@ -58,12 +62,17 @@ public class Vec2 {
         return (float) Math.acos(this.cosAngle(v));
     }
 
+
     public Point toPoint() {
         return new Point(Math.round(x), Math.round(y));
     }
 
     public Float2 toFloat2() {
         return new Float2(x, y);
+    }
+
+    public String toString() {
+        return "(" + this.x + ", " + this.y + ")";
     }
 
 }

@@ -4,39 +4,68 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.RectF;
 import android.renderscript.Float2;
 
 import game.engine.Engine;
-import game.engine.Texture;
+import game.engine.Vec2;
 
 /**
  * Created by Andronius on 7/30/16.
  */
-public class Cannon extends game.engine.Sprite {
-    private static int LENGTH = 200;
-    private static int color = Color.BLACK;
+public class Cannon {
+    public static int RADIUS;
+    public Vec2 center;
+    public float angle = 0.0f;
+    public Vec2 direction;
+    public static int color = Color.BLACK;
+    public static final Vec2 vertical = new Vec2(0, -1);
+    private Game engine;
+    private Bobble bobble = null;
 
+    public static float cos(float theta) {return (float) Math.cos(theta);}
+    public static float sin(float theta) {return (float) Math.sin(theta);}
 
-    public Cannon(Engine engine) {
-        super(engine, LENGTH/2, LENGTH, 1);
-        this.setTexture(new Texture(engine, makeBitmap(color)));
-        this.setCollidable(false);
+    public Cannon (Game e, Vec2 center) {
+        this.center = center;
+        this.engine = e;
+        this.direction = new Vec2(0, -1);
+
     }
 
+    public void load(Bobble b) {
+        bobble = b;
+        Vec2 offset = new Vec2(b.getSize()).times(-.5f);
+        bobble.setPosition(this.center.plus(offset).toFloat2());
+        bobble.setVelocity(new Float2(0,0));
+        engine.initNextBobble();
+    }
 
-    public static Bitmap makeBitmap(int color) {
-        Bitmap b = Bitmap.createBitmap(LENGTH/2, LENGTH, Bitmap.Config.ARGB_8888);
-        Canvas buffer = new Canvas(b);
-        Paint paint = new Paint();
+    public void fire() {
+        if (bobble != null) {
+            bobble.setVelocity(this.direction.times(Game.LAUNCH_SPEED).toFloat2());
+            bobble.addAnimation(new ReboundBehavior(new RectF(engine.frame), bobble.getSize(), bobble.getVelocity()));
+        }
+    }
+
+    public void draw(Canvas canvas, Paint paint) {
         paint.setColor(color);
-        paint.setStrokeWidth(10);
-        float w = (float) buffer.getWidth();
-        float h = (float) buffer.getHeight();
-        buffer.drawLine(w/2, 0, w/2, h, paint);
-        return b;
+        paint.setStrokeWidth(8.0f);
+        canvas.drawLine(
+                center.x - RADIUS*direction.x, center.y - RADIUS*direction.y,
+                center.x + RADIUS*direction.x, center.y + RADIUS*direction.y, paint);
     }
 
-    public static void setLENGTH(int L) {
-        LENGTH = L;
+    public void drawArrow(float startX, float startY, float endX, float endY, Canvas canvas, Paint paint) {
+        canvas.drawLine(startX, startY, endX, endY, paint);
+        paint.setStyle(Paint.Style.FILL);
+
     }
+
+
+    public static void setRADIUS(int r) {
+        RADIUS = r;
+    }
+
+
 }

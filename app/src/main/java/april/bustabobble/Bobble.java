@@ -12,7 +12,7 @@ import game.engine.Texture;
  * Created by Andronius on 7/20/16.
  */
 public class Bobble extends game.engine.Sprite {
-    private static int RADIUS = 80;
+    private static int RADIUS;
     public static int color;
 
     public Bobble(Engine engine, int color) {

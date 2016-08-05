@@ -28,6 +28,7 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.View.OnTouchListener;
 import android.view.Window;
+import android.view.WindowManager;
 
 import java.math.BigDecimal;
 import java.util.LinkedList;
@@ -45,6 +46,7 @@ public abstract class Engine extends Activity implements Runnable, OnTouchListen
     private Paint p_paintDraw, p_paintFont;
     private Typeface p_typeface;
     private Point[] p_touchPoints;
+    private boolean p_pressed;
     private int p_numPoints; 
     private long p_preferredFrameRate, p_sleepTime;
     private Point p_screenSize;
@@ -62,6 +64,7 @@ public abstract class Engine extends Activity implements Runnable, OnTouchListen
         p_thread = null;
         p_running = false;
         p_paused = false;
+        p_pressed = false;
         p_paintDraw = null;
         p_paintFont = null;
         p_numPoints = 0;
@@ -89,7 +92,13 @@ public abstract class Engine extends Activity implements Runnable, OnTouchListen
     public abstract void draw();
     public abstract void update();
     public abstract void collision(Sprite sprite);
-    
+
+    public void onPress(Point touch_pt){
+        p_pressed = true;
+    }
+    public void onRelease(Point release_pt) {
+        p_pressed = false;
+    }
 
     /**
      * Activity.onCreate event method
@@ -101,7 +110,9 @@ public abstract class Engine extends Activity implements Runnable, OnTouchListen
 
         //disable the title bar
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         //set default screen orientation
         //setScreenOrientation(ScreenModes.LANDSCAPE);
         
@@ -376,6 +387,8 @@ public abstract class Engine extends Activity implements Runnable, OnTouchListen
      */
     @Override
     public boolean onTouch(View v, MotionEvent event) {
+
+
         //count the touch inputs
         p_numPoints = event.getPointerCount();
         if (p_numPoints > 5) p_numPoints = 5;
@@ -385,9 +398,22 @@ public abstract class Engine extends Activity implements Runnable, OnTouchListen
             p_touchPoints[n].x = (int)event.getX(n);
             p_touchPoints[n].y = (int)event.getY(n);
         }
+
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                onPress(p_touchPoints[0]);
+                break;
+            case MotionEvent.ACTION_UP:
+                onRelease(p_touchPoints[0]);
+                break;
+        }
+
         return true;
     }
-    
+
+
+
+
     /**
      * Shortcut methods to duplicate existing Android methods.
      */
@@ -439,6 +465,10 @@ public abstract class Engine extends Activity implements Runnable, OnTouchListen
         if (index > p_numPoints) 
             index = p_numPoints;
         return p_touchPoints[index];
+    }
+
+    public boolean isPressed() {
+        return p_pressed;
     }
     
     public void setDrawColor(int color) {

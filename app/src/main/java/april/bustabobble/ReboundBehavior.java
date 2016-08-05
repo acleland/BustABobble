@@ -30,8 +30,11 @@ public class ReboundBehavior extends Animation {
         else if (modified.x > p_bounds.right-p_size.x)
             p_velocity.x *= -1;
 
-        if (modified.y < p_bounds.top)
-            p_velocity.y *= -1;
+        if (modified.y < p_bounds.top) {
+           // Stick to Top
+            p_velocity = new Float2(0,0);
+            modified.y = p_bounds.top;
+        }
         else if (modified.y > p_bounds.bottom-p_size.y)
             p_velocity.y *= -1;
 
