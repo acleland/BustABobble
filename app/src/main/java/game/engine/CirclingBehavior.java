@@ -2,7 +2,6 @@
  * CirclingBehavior Class
  */
 package game.engine;
-import android.renderscript.Float2;
 
 public class CirclingBehavior extends Animation {
     private int p_radius;

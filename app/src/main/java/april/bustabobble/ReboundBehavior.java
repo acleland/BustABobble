@@ -4,7 +4,6 @@
  */
 package april.bustabobble;
 import android.graphics.*;
-import android.renderscript.Float2;
 import game.engine.*;
 
 public class ReboundBehavior extends Animation {

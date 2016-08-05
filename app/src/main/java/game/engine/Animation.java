@@ -4,7 +4,6 @@
  */
 package game.engine;
 
-import android.renderscript.Float2;
 
 public class Animation {
     public boolean animating;

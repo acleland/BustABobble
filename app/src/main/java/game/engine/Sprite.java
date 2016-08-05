@@ -13,7 +13,6 @@ import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.RectF;
-import android.renderscript.Float2;
 
 import java.util.LinkedList;
 import java.util.ListIterator;

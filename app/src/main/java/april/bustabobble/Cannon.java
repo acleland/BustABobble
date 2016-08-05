@@ -1,49 +1,46 @@
 package april.bustabobble;
 
-import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
-import android.renderscript.Float2;
 
-import game.engine.Engine;
-import game.engine.Vec2;
+import game.engine.Float2;
 
 /**
  * Created by Andronius on 7/30/16.
  */
 public class Cannon {
     public static int RADIUS;
-    public Vec2 center;
+    public Float2 center;
     public float angle = 0.0f;
-    public Vec2 direction;
+    public Float2 direction;
     public static int color = Color.BLACK;
-    public static final Vec2 vertical = new Vec2(0, -1);
+    public static final Float2 vertical = new Float2(0, -1);
     private Game engine;
     private Bobble bobble = null;
 
     public static float cos(float theta) {return (float) Math.cos(theta);}
     public static float sin(float theta) {return (float) Math.sin(theta);}
 
-    public Cannon (Game e, Vec2 center) {
+    public Cannon (Game e, Float2 center) {
         this.center = center;
         this.engine = e;
-        this.direction = new Vec2(0, -1);
+        this.direction = new Float2(0, -1);
 
     }
 
     public void load(Bobble b) {
         bobble = b;
-        Vec2 offset = new Vec2(b.getSize()).times(-.5f);
-        bobble.setPosition(this.center.plus(offset).toFloat2());
+        Float2 offset = new Float2(b.getSize()).times(-.5f);
+        bobble.setPosition(this.center.plus(offset));
         bobble.setVelocity(new Float2(0,0));
         engine.initNextBobble();
     }
 
     public void fire() {
         if (bobble != null) {
-            bobble.setVelocity(this.direction.times(Game.LAUNCH_SPEED).toFloat2());
+            bobble.setVelocity(this.direction.times(Game.LAUNCH_SPEED));
             bobble.addAnimation(new ReboundBehavior(new RectF(engine.frame), bobble.getSize(), bobble.getVelocity()));
         }
     }

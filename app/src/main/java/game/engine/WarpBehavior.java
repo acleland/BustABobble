@@ -6,7 +6,6 @@ package game.engine;
 
 import android.graphics.Point;
 import android.graphics.RectF;
-import android.renderscript.Float2;
 
 public class WarpBehavior extends Animation {
     private RectF p_bounds;

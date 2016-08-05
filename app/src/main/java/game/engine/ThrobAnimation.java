@@ -2,7 +2,6 @@
  * ThrobAnimation Class
  */
 package game.engine;
-import android.renderscript.Float2;
 
 public class ThrobAnimation extends Animation {
     private float p_startScale, p_endScale, p_speed;

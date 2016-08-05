@@ -1,9 +1,9 @@
 package april.bustabobble;
 import java.util.Random;
 import android.graphics.*;
-import android.renderscript.*;
-import game.engine.*;
 
+import game.engine.*;
+import game.engine.Float2;
 
 
 public class Game extends game.engine.Engine {
@@ -74,7 +74,7 @@ public class Game extends game.engine.Engine {
         initNextBobble();
 
         // Init Cannon
-        cannon = new Cannon(this, new Vec2(frame.centerX(), frame.bottom - Cannon.RADIUS));
+        cannon = new Cannon(this, new Float2(frame.centerX(), frame.bottom - Cannon.RADIUS));
         cannon.load(nextBobble);
     }
 
@@ -179,7 +179,7 @@ public class Game extends game.engine.Engine {
     }
 
     public void rotateCannon(Point touch) {
-        Vec2 v_touch = (new Vec2(touch.x, touch.y)).minus(cannon.center);
+        Float2 v_touch = (new Float2(touch.x, touch.y)).minus(cannon.center);
         cannon.direction = v_touch.times(1/v_touch.mag());
     }
 

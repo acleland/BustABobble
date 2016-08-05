@@ -3,7 +3,6 @@
  */
 package game.engine;
 import android.graphics.RectF;
-import android.renderscript.Float2;
 
 public class FenceBehavior extends Animation {
     private RectF p_fence;

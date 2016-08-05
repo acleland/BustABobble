@@ -19,7 +19,6 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.renderscript.Float2;
 import android.renderscript.Float3;
 import android.util.DisplayMetrics;
 import android.util.Log;

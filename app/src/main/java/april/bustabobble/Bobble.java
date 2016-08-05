@@ -3,9 +3,9 @@ package april.bustabobble;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.renderscript.Float2;
 
 import game.engine.Engine;
+import game.engine.Float2;
 import game.engine.Texture;
 
 /**
