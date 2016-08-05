@@ -103,7 +103,8 @@ public class Game extends game.engine.Engine {
         else if (ready) {
             cannon.fire();
             cannon.load(nextBobble);
-            launching = true;
+            //launching = true;
+            ready = false;
         }
 
     }
@@ -173,7 +174,7 @@ public class Game extends game.engine.Engine {
     public void initNextBobble() {
         nextBobble = getNextBobble();
         Point size = nextBobble.getSize();
-        nextBobble.setPosition(new Vec2((frame.left + frame.centerX())/2, frame.bottom - Bobble.getRADIUS()));
+        nextBobble.setPosition(new Vec2((frame.left + frame.centerX())/2, frame.bottom - 2*Bobble.getRADIUS()));
         addToGroup(nextBobble);
 
     }
