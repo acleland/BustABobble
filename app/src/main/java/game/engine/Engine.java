@@ -52,6 +52,7 @@ public abstract class Engine extends Activity implements Runnable, OnTouchListen
     private LinkedList<Sprite> p_group;
     public static final int TEST = 250;
     private boolean debug = true;
+    private int numCollisions = 0;
     
     /**
      * Engine constructor
@@ -203,11 +204,12 @@ public abstract class Engine extends Activity implements Runnable, OnTouchListen
                 Sprite sprA = (Sprite)iterA.next();
                 if (!sprA.getAlive()) continue;
                 if (!sprA.getCollidable()) continue;
-                    
+
                 /*
                  * Improvement to prevent double collision testing
                  */
-                if (sprA.getCollided()) 
+
+                if (sprA.getCollided())
                     continue; //skip to next iterator
                 
                 //iterate the list again
@@ -219,7 +221,7 @@ public abstract class Engine extends Activity implements Runnable, OnTouchListen
                     
                     /*
                      * Improvement to prevent double collision testing
-                     */
+                    */
                     if (sprB.getCollided()) 
                         continue; //skip to next iterator
 
@@ -230,8 +232,9 @@ public abstract class Engine extends Activity implements Runnable, OnTouchListen
                      * Ignore sprites with the same ID? This is an important
                      * consideration. Decide if your game requires it or not.
                      */
-                    if (sprA.getIdentifier() == sprB.getIdentifier())
-                        continue;
+                    //if (sprA.getIdentifier() == sprB.getIdentifier())
+                      //  continue;
+
                     
                     if (collisionCheck(sprA, sprB)) {
                         sprA.setCollided(true);
@@ -243,7 +246,8 @@ public abstract class Engine extends Activity implements Runnable, OnTouchListen
                 }
             }
 
-            
+
+
             // begin drawing
             if (beginDrawing()) {
  
@@ -270,10 +274,10 @@ public abstract class Engine extends Activity implements Runnable, OnTouchListen
                     int temp = p_paintFont.getColor();
                     p_paintFont.setColor(Color.RED);
                     int x = p_canvas.getWidth()-150;
-                    p_canvas.drawText("ENGINE", x, 20, p_paintFont);
+                    p_canvas.drawText("Game", x, 20, p_paintFont);
                     p_canvas.drawText(toString(frameRate) + " FPS", x, 40,
                         p_paintFont);
-                    p_canvas.drawText("Pauses: " + toString(p_pauseCount),
+                    p_canvas.drawText("Sprites: " + p_group.size(),
                         x, 60, p_paintFont);
                     p_paintFont.setColor(temp);
                 }
@@ -336,7 +340,7 @@ public abstract class Engine extends Activity implements Runnable, OnTouchListen
             }
             
         }//while
-        Log.d("Engine","Engine.run end");
+       // Log.d("Engine","Engine.run end");
         System.exit(RESULT_OK);
     }    
     
@@ -611,6 +615,10 @@ public abstract class Engine extends Activity implements Runnable, OnTouchListen
     
     public int getGroupSize() {
         return p_group.size();
+    }
+
+    public LinkedList<Sprite> getGroup() {
+        return this.p_group;
     }
     
     /**

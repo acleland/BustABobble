@@ -18,7 +18,7 @@ public class Cannon {
     public static int color = Color.BLACK;
     public static final Vec2 vertical = new Vec2(0, -1);
     private Game engine;
-    private Bobble bobble = null;
+    //private Bobble bobble = null;
 
     public static float cos(float theta) {return (float) Math.cos(theta);}
     public static float sin(float theta) {return (float) Math.sin(theta);}
@@ -30,20 +30,6 @@ public class Cannon {
 
     }
 
-    public void load(Bobble b) {
-        bobble = b;
-        Vec2 offset = new Vec2(b.getSize()).times(-.5f);
-        bobble.setPosition(this.center.plus(offset));
-        bobble.setVelocity(new Vec2(0,0));
-        engine.initNextBobble();
-    }
-
-    public void fire() {
-        if (bobble != null) {
-            bobble.setVelocity(this.direction.times(Game.LAUNCH_SPEED));
-            bobble.addAnimation(new ReboundBehavior(new RectF(engine.frame), bobble.getSize(), bobble.getVelocity()));
-        }
-    }
 
     public void draw(Canvas canvas, Paint paint) {
         paint.setColor(color);
@@ -54,6 +40,8 @@ public class Cannon {
     }
 
     public void drawArrow(float startX, float startY, float endX, float endY, Canvas canvas, Paint paint) {
+        // Unfinished. Eventually would like cannon to be cool looking.
+
         canvas.drawLine(startX, startY, endX, endY, paint);
         paint.setStyle(Paint.Style.FILL);
 

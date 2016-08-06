@@ -1,6 +1,7 @@
 package april.bustabobble;
 import java.util.Random;
 import android.graphics.*;
+import android.util.Log;
 
 import game.engine.*;
 import game.engine.Vec2;
@@ -14,17 +15,21 @@ public class Game extends game.engine.Engine {
     Bitmap bg_pattern = null;
     Bitmap frame_pattern = null;
     Rect frame = null;
-    Bobble testBobble2 = null;
     private int score = 0;
     Cannon cannon = null;
+    Sprite compressor = null;
 
     Bobble nextBobble = null;
+    Bobble loadedBobble = null;
     public static final int BOBBLES_PER_FRAME_WIDTH = 10;
     public static final float FRAME_HEIGHT_TO_WIDTH = 1.7f;
     public static final float Y_FRAME_RATIO = .98f;
     public static final float LAUNCH_SPEED = 10.0f;
     public boolean ready = false;
     public boolean launching = false;
+    public static final int LOOSE = 100;
+    public static final int IN_GRID = 200;
+
 
     public Game() {
         paint = new Paint();
@@ -62,20 +67,15 @@ public class Game extends game.engine.Engine {
             System.out.println("height: " + frame.height());
         }
 
-        // Init testBobble2
-        testBobble2 = new Bobble(this, Colors.TRANS_PINK, new Vec2(w/3, h/4));
-        testBobble2.setVelocity(new Vec2(4.0f,-6.0f));
-        Point size = testBobble2.getSize();
-        testBobble2.addAnimation(new ReboundBehavior(new RectF(frame),
-                size, testBobble2.getVelocity()) );
-        addToGroup(testBobble2);
+        // Init Compressor
+        initCompressor(frame);
 
         // Init Next Bobble
         initNextBobble();
 
         // Init Cannon
         cannon = new Cannon(this, new Vec2(frame.centerX(), frame.bottom - Cannon.RADIUS));
-        cannon.load(nextBobble);
+        loadCannon();
     }
 
     public void draw() {
@@ -101,15 +101,21 @@ public class Game extends game.engine.Engine {
                 ready = true;
         }
         else if (ready) {
-            cannon.fire();
-            cannon.load(nextBobble);
+            fireCannon();
+            loadCannon();
             //launching = true;
             ready = false;
         }
 
+
+
     }
 
     public void collision(Sprite sprite) {
+        Bobble bobble = (Bobble) sprite;
+        Bobble other = (Bobble) sprite.getOffender();
+        bobble.setColor(Color.BLACK);
+        other.setColor(Color.DKGRAY);
 
     }
 
@@ -169,10 +175,11 @@ public class Game extends game.engine.Engine {
     } // drawCheckerBoard()
 
 
-
-
     public void initNextBobble() {
         nextBobble = getNextBobble();
+        nextBobble.setAlive(true);
+        nextBobble.setCollidable(false);
+        nextBobble.setIdentifier(LOOSE);
         Point size = nextBobble.getSize();
         nextBobble.setPosition(new Vec2((frame.left + frame.centerX())/2, frame.bottom - 2*Bobble.getRADIUS()));
         addToGroup(nextBobble);
@@ -182,6 +189,24 @@ public class Game extends game.engine.Engine {
     public void rotateCannon(Point touch) {
         Vec2 v_touch = (new Vec2(touch.x, touch.y)).minus(cannon.center);
         cannon.direction = v_touch.times(1/v_touch.mag());
+    }
+
+
+    public void loadCannon() {
+        loadedBobble = nextBobble;
+        Vec2 offset = new Vec2(loadedBobble.getSize()).times(-.5f);
+        loadedBobble.setPosition(cannon.center.plus(offset));
+        loadedBobble.setVelocity(new Vec2(0,0));
+        initNextBobble();
+
+    }
+
+    public void fireCannon() {
+        if (loadedBobble != null) {
+            loadedBobble.setVelocity(cannon.direction.times(Game.LAUNCH_SPEED));
+            loadedBobble.addAnimation(new ReboundBehavior(new RectF(frame), loadedBobble.getSize(), loadedBobble.getVelocity()));
+            loadedBobble.setCollidable(true);
+        }
     }
 
     public Bobble getNextBobble() {
@@ -198,6 +223,10 @@ public class Game extends game.engine.Engine {
                 testBobble.position.y = touch.y - 50;
             }
         }
+    }
+
+    public void initCompressor(Rect frame) {
+
     }
 
 
