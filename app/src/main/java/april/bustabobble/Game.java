@@ -1,7 +1,6 @@
 package april.bustabobble;
 import java.util.Random;
 import android.graphics.*;
-import android.util.Log;
 
 import game.engine.*;
 import game.engine.Vec2;
@@ -18,6 +17,7 @@ public class Game extends game.engine.Engine {
     private int score = 0;
     Cannon cannon = null;
     Sprite compressor = null;
+    BobbleGrid bobble_grid = null;
 
     Bobble nextBobble = null;
     Bobble loadedBobble = null;
@@ -27,8 +27,8 @@ public class Game extends game.engine.Engine {
     public static final float LAUNCH_SPEED = 10.0f;
     public boolean ready = false;
     public boolean launching = false;
-    public static final int LOOSE = 100;
-    public static final int IN_GRID = 200;
+    public static final int LOOSE = 200;
+    public static final int IN_GRID = 100;
 
 
     public Game() {
@@ -66,6 +66,9 @@ public class Game extends game.engine.Engine {
             System.out.println("width: " + frame.width());
             System.out.println("height: " + frame.height());
         }
+
+        // Init BobbleGrid
+        bobble_grid = new BobbleGrid(this, frame);
 
         // Init Compressor
         initCompressor(frame);
@@ -112,10 +115,57 @@ public class Game extends game.engine.Engine {
     }
 
     public void collision(Sprite sprite) {
-        Bobble bobble = (Bobble) sprite;
-        Bobble other = (Bobble) sprite.getOffender();
-        bobble.setColor(Color.BLACK);
-        other.setColor(Color.DKGRAY);
+        Bobble bobble;
+        Sprite other;
+        if (debugging())
+            System.out.println("Collision detected: " + sprite.getIdentifier() + ", " + sprite.getOffender().getIdentifier());
+        sprite.setCollided(false);
+        sprite.getOffender().setCollided(false);
+        if (sprite.getIdentifier() == IN_GRID) {
+            if (sprite.getOffender().getIdentifier() == LOOSE) {
+                bobble = (Bobble) sprite.getOffender();
+                other = sprite;
+            }
+            else {
+                System.out.println("This shouldn't happen");
+                System.out.println(sprite.getName() + ", " + sprite.getOffender().getName());
+                System.out.println(sprite.getIdentifier() + ", " + sprite.getOffender().getIdentifier());
+                return;
+            }
+        }
+        else {
+            bobble = (Bobble) sprite;
+            other = sprite.getOffender();
+        }
+        float sqrt2 = 1.41421f;
+        switch (other.getName()) {
+            case "compressor":
+                bobble.setVelocity(new Vec2(0,0));
+                bobble.setIdentifier(IN_GRID);
+                break;
+            case "bobble":
+                Bobble otherBobble = (Bobble) other;
+                Vec2 otherCenter = otherBobble.getCenter();
+                Vec2 diff = otherCenter.minus(bobble.getCenter());
+                if (diff.y <= Bobble.getRADIUS()/2) {
+                    if (diff.x < 0) {
+                        bobble.setCenter(new Vec2(otherCenter.x - 2*Bobble.getRADIUS(), otherCenter.y));
+                    }
+                    else {
+                        bobble.setCenter(new Vec2(otherCenter.x + 2*Bobble.getRADIUS(), otherCenter.y));
+                    }
+                }
+                else if (diff.x < 0) {
+                    bobble.setCenter(new Vec2(otherCenter.x - Bobble.getRADIUS(), otherCenter.y + sqrt2*Bobble.getRADIUS()));
+                }
+                else {
+                    bobble.setCenter(new Vec2(otherCenter.x + Bobble.getRADIUS(), otherCenter.y + sqrt2*Bobble.getRADIUS()));
+                }
+                bobble.setVelocity(new Vec2(0,0));
+                bobble.setIdentifier(IN_GRID);
+                break;
+        }
+
 
     }
 
@@ -214,19 +264,21 @@ public class Game extends game.engine.Engine {
         return new Bobble(this, color);
     }
 
-    public void moveBobbleOnTouch(Bobble testBobble) {
-        int inputs = getTouchInputs();
-        if (inputs > 0) {
-            touch = getTouchPoint(0);
-            {
-                testBobble.position.x = touch.x - testBobble.getWidth()/2;
-                testBobble.position.y = touch.y - 50;
-            }
-        }
-    }
 
     public void initCompressor(Rect frame) {
-
+        int width = frame.width();
+        int height = width/30;
+        compressor = new Sprite(this, width, height, 1);
+        Bitmap b = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        Canvas buffer = new Canvas(b);
+        Paint paint = new Paint();
+        buffer.drawColor(Color.DKGRAY);
+        compressor.setTexture(new Texture(this, b));
+        compressor.setPosition(new Vec2(frame.left, frame.top));
+        compressor.setIdentifier(IN_GRID);
+        compressor.setCollidable(true);
+        compressor.setName("compressor");
+        addToGroup(compressor);
     }
 
 

@@ -232,8 +232,8 @@ public abstract class Engine extends Activity implements Runnable, OnTouchListen
                      * Ignore sprites with the same ID? This is an important
                      * consideration. Decide if your game requires it or not.
                      */
-                    //if (sprA.getIdentifier() == sprB.getIdentifier())
-                      //  continue;
+                    if (sprA.getIdentifier() == sprB.getIdentifier())
+                        continue;
 
                     
                     if (collisionCheck(sprA, sprB)) {

@@ -18,6 +18,7 @@ public class Bobble extends game.engine.Sprite {
 
     public Bobble(Game engine, int color) {
         super(engine, 2*RADIUS, 2*RADIUS, 1);
+        setName("bobble");
         this.game = engine;
         this.setTexture(new Texture(engine, makeBitmap(color)));
         this.setCollidable(true);
@@ -27,6 +28,7 @@ public class Bobble extends game.engine.Sprite {
     public Bobble(Game engine, int color, Vec2 pos) {
         this(engine, color);
         this.setPosition(pos);
+
     }
 
     public static Bitmap makeBitmap(int color) {
@@ -53,5 +55,13 @@ public class Bobble extends game.engine.Sprite {
 
     public int getColor() {
         return this.color;
+    }
+
+    public Vec2 getCenter() {
+        return getPosition().plus(new Vec2(RADIUS, RADIUS));
+    }
+
+    public void setCenter(Vec2 center) {
+        setPosition(center.minus(new Vec2 (RADIUS, RADIUS)));
     }
 }
