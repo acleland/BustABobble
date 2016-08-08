@@ -119,8 +119,8 @@ public class Game extends game.engine.Engine {
         Sprite other;
         if (debugging())
             System.out.println("Collision detected: " + sprite.getIdentifier() + ", " + sprite.getOffender().getIdentifier());
-        sprite.setCollided(false);
-        sprite.getOffender().setCollided(false);
+        //sprite.setCollided(false);
+        //sprite.getOffender().setCollided(false);
         if (sprite.getIdentifier() == IN_GRID) {
             if (sprite.getOffender().getIdentifier() == LOOSE) {
                 bobble = (Bobble) sprite.getOffender();
@@ -141,27 +141,43 @@ public class Game extends game.engine.Engine {
         switch (other.getName()) {
             case "compressor":
                 bobble.setVelocity(new Vec2(0,0));
+                bobble.removeAnimations();
                 bobble.setIdentifier(IN_GRID);
                 break;
             case "bobble":
                 Bobble otherBobble = (Bobble) other;
                 Vec2 otherCenter = otherBobble.getCenter();
                 Vec2 diff = otherCenter.minus(bobble.getCenter());
-                if (diff.y <= Bobble.getRADIUS()/2) {
+                float R = (float) Bobble.getRADIUS();
+                Vec2 vel = bobble.getVelocity();
+                float v = vel.mag();
+
+                // Backtrack to point of collision:
+                float offset_factor = (2*R/v) - diff.dot(vel)/(v*v);
+                bobble.setCenter(bobble.getCenter().minus(vel.times(offset_factor)));
+                diff = bobble.getCenter().minus(otherCenter);
+                if (diff.y <= R/2) {
+                    if (debugging()) {
+                        System.out.println("diff.y = " + diff.y + ", R/2 = " + R/2);
+                    }
+                    // Place in same row, either to left or right
                     if (diff.x < 0) {
-                        bobble.setCenter(new Vec2(otherCenter.x - 2*Bobble.getRADIUS(), otherCenter.y));
+                        bobble.setCenter(new Vec2(otherCenter.x - 2*R, otherCenter.y));
                     }
                     else {
-                        bobble.setCenter(new Vec2(otherCenter.x + 2*Bobble.getRADIUS(), otherCenter.y));
+                        bobble.setCenter(new Vec2(otherCenter.x + 2*R, otherCenter.y));
                     }
                 }
                 else if (diff.x < 0) {
-                    bobble.setCenter(new Vec2(otherCenter.x - Bobble.getRADIUS(), otherCenter.y + sqrt2*Bobble.getRADIUS()));
+                    // Place in row below, to either left or right
+                    bobble.setCenter(new Vec2(otherCenter.x - R, otherCenter.y + sqrt2*R));
                 }
                 else {
-                    bobble.setCenter(new Vec2(otherCenter.x + Bobble.getRADIUS(), otherCenter.y + sqrt2*Bobble.getRADIUS()));
+                    bobble.setCenter(new Vec2(otherCenter.x + R, otherCenter.y + sqrt2*R));
                 }
+
                 bobble.setVelocity(new Vec2(0,0));
+                bobble.removeAnimations();
                 bobble.setIdentifier(IN_GRID);
                 break;
         }

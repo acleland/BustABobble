@@ -53,6 +53,10 @@ public class Vec2 {
         return x*x + y*y;
     }
 
+    public Vec2 getUnit() {
+        return this.times(1.0f/this.mag());
+    }
+
     public float cosAngle(Vec2 v) {
         return this.dot(v)/(this.mag()*v.mag());
     }
@@ -60,6 +64,7 @@ public class Vec2 {
     public float getAngle(Vec2 v) {
         return (float) Math.acos(this.cosAngle(v));
     }
+
 
 
     public Point toPoint() {

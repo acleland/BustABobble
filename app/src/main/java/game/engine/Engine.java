@@ -311,15 +311,21 @@ public abstract class Engine extends Activity implements Runnable, OnTouchListen
 
                         //is the target a valid object?
                         if (spr.getOffender() != null) {
+                            // do they have the same ID?
+                            //if (spr.getIdentifier() !=  spr.getOffender().getIdentifier())
+                            {
 
-                            /*
-                             * External func call: notify game of collision
-                             * (with validated offender)
-                             */
-                            collision(spr);
+                                /*
+                                 * External func call: notify game of collision
+                                 * (with validated offender)
+                                 */
+                                collision(spr);
 
-                            //reset offender
-                            spr.setOffender(null);
+                                //reset offender
+                                spr.getOffender().setCollided(false);
+                                spr.getOffender().setOffender(null);
+                                spr.setOffender(null);
+                            }
                         }
 
                         //reset collided state
