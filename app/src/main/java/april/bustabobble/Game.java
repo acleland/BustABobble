@@ -21,9 +21,9 @@ public class Game extends game.engine.Engine {
 
     Bobble nextBobble = null;
     Bobble loadedBobble = null;
-    public static final int BOBBLES_PER_FRAME_WIDTH = 10;
-    public static final float FRAME_HEIGHT_TO_WIDTH = 1.7f;
-    public static final float Y_FRAME_RATIO = .98f;
+    public static final int BOBBLES_PER_FRAME_WIDTH = 8;
+    public static final float FRAME_HEIGHT_TO_WIDTH = 1.6f;
+    public static final float Y_FRAME_RATIO = .90f;
     public static final float LAUNCH_SPEED = 10.0f;
     public boolean ready = false;
     public boolean launching = false;
@@ -35,6 +35,7 @@ public class Game extends game.engine.Engine {
         paint = new Paint();
         paint.setColor(Color.RED);
         random = new Random();
+        this.setDebug(false);
     }
 
     /*
@@ -88,9 +89,10 @@ public class Game extends game.engine.Engine {
         cannon.draw(canvas, paint);
         setTextColor(Color.RED);
         drawText("SCORE: " + toString(score), 0, 20);
-
-        if (touch != null) {
-            drawText("Touch " + touch.x + ", " + touch.y, 0, 80);
+        if (debugging()) {
+            if (touch != null) {
+                drawText("Touch " + touch.x + ", " + touch.y, 0, 80);
+            }
         }
 
     }
@@ -119,8 +121,7 @@ public class Game extends game.engine.Engine {
         Sprite other;
         if (debugging())
             System.out.println("Collision detected: " + sprite.getIdentifier() + ", " + sprite.getOffender().getIdentifier());
-        //sprite.setCollided(false);
-        //sprite.getOffender().setCollided(false);
+
         if (sprite.getIdentifier() == IN_GRID) {
             if (sprite.getOffender().getIdentifier() == LOOSE) {
                 bobble = (Bobble) sprite.getOffender();
@@ -170,10 +171,10 @@ public class Game extends game.engine.Engine {
                 }
                 else if (diff.x < 0) {
                     // Place in row below, to either left or right
-                    bobble.setCenter(new Vec2(otherCenter.x - R, otherCenter.y + sqrt2*R));
+                    bobble.setCenter(new Vec2(otherCenter.x - sqrt2*R, otherCenter.y + sqrt2*R));
                 }
                 else {
-                    bobble.setCenter(new Vec2(otherCenter.x + R, otherCenter.y + sqrt2*R));
+                    bobble.setCenter(new Vec2(otherCenter.x + sqrt2*R, otherCenter.y + sqrt2*R));
                 }
 
                 bobble.setVelocity(new Vec2(0,0));
