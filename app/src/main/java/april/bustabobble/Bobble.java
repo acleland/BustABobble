@@ -58,10 +58,10 @@ public class Bobble extends game.engine.Sprite {
     }
 
     public Vec2 getCenter() {
-        return getPosition().plus(new Vec2(RADIUS, RADIUS));
+        return getPosition().plus(new Vec2((float)this.getWidth()/2, (float)this.getHeight()/2));
     }
 
     public void setCenter(Vec2 center) {
-        setPosition(center.minus(new Vec2 (RADIUS, RADIUS)));
+        setPosition(center.minus(new Vec2((float)this.getWidth()/2, (float)this.getHeight()/2)));
     }
 }

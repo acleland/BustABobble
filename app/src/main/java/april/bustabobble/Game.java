@@ -139,6 +139,7 @@ public class Game extends game.engine.Engine {
             other = sprite.getOffender();
         }
         float sqrt2 = 1.41421f;
+        float sin60 = 0.866f;
         switch (other.getName()) {
             case "compressor":
                 bobble.setVelocity(new Vec2(0,0));
@@ -171,10 +172,10 @@ public class Game extends game.engine.Engine {
                 }
                 else if (diff.x < 0) {
                     // Place in row below, to either left or right
-                    bobble.setCenter(new Vec2(otherCenter.x - sqrt2*R, otherCenter.y + sqrt2*R));
+                    bobble.setCenter(new Vec2(otherCenter.x - R, otherCenter.y + 2*R*sin60));
                 }
                 else {
-                    bobble.setCenter(new Vec2(otherCenter.x + sqrt2*R, otherCenter.y + sqrt2*R));
+                    bobble.setCenter(new Vec2(otherCenter.x + R, otherCenter.y + 2*R*sin60));
                 }
 
                 bobble.setVelocity(new Vec2(0,0));
