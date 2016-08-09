@@ -8,9 +8,7 @@ public enum BobbleColor {
     ORANGE(Colors.TRANS_ORANGE),
     YELLOW(Colors.TRANS_YELLOW),
     GREEN(Colors.TRANS_GREEN),
-    BLUE(Colors.TRANS_BLUE),
-    PURPLE(Colors.TRANS_PURPLE),
-    PINK(Colors.TRANS_PINK);
+    BLUE(Colors.TRANS_BLUE);
 
     private int colorValue;
     private static final BobbleColor[] VALUES = values();
