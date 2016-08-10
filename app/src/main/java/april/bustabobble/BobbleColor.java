@@ -1,7 +1,7 @@
 package april.bustabobble;
 import java.util.Random;
 /**
- * Created by Andronius on 8/4/16.
+ * Copyright (c) 2016 Andrew Cleland.
  */
 public enum BobbleColor {
     RED(Colors.TRANS_RED),

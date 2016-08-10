@@ -1,7 +1,10 @@
 package april.bustabobble;
+/**
+ * Copyright (c) 2016 Andrew Cleland.
+ */
+
 import java.util.Random;
 import android.graphics.*;
-
 import game.engine.*;
 import game.engine.Vec2;
 
@@ -145,6 +148,7 @@ public class Game extends game.engine.Engine {
                 bobble.setVelocity(new Vec2(0,0));
                 bobble.removeAnimations();
                 bobble.setIdentifier(IN_GRID);
+                bobble_grid.placeInTopRow(bobble);
                 break;
             case "bobble":
                 Bobble otherBobble = (Bobble) other;
@@ -240,7 +244,7 @@ public class Game extends game.engine.Engine {
             color1 = color2;
             color2 = temp;
         }
-    } // drawCheckerBoard()
+    }
 
 
     public void initNextBobble() {
@@ -300,6 +304,20 @@ public class Game extends game.engine.Engine {
     }
 
 
+    /** An override I'm thinking of doing to do a circle collision check for bobbles.
+     * I dislike the downcasting code smell, but it may be the simplest way to do it.
+
+
+    @Override
+    public boolean collisionCheck(Sprite A, Sprite B) {
+        boolean rectIntersects = super.collisionCheck(A, B);
+        if (!rectIntersects)
+            return false;
+        else if (A.getName().equals("bobble") && B.getName().equals("bobble")) {
+            Bobble bobbleA = (Bobble)
+        }
+    }
+   */
 
 
 }
