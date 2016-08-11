@@ -18,7 +18,12 @@ Note to Bart for grading: files written in package april.bustabobble are written
 https://github.com/acleland/BustABobble
 
 # Build Instructions
-The project is organized as an Android Studio project. After downloading the source code to a directory of your choice, use Android Studio to import a new project from that directory. Use Android Studio tools to build BustABobble onto a connected Android device or an emulator.
+* As a prerequisite, I suggest obtaining a copy of Android Studio. 
+* Download the source code from GitHub to a directory of your choice, 
+* Use Android Studio to import a project from that directory. 
+* Building the project in Android Studio will require installing Android SDK Build-Tools 24. Android Studio should provide you a link for doing that.
+* Press the green Run button or use Run->'Run app' from the drop down menu. It will prompt you to select device you want to run on. You may use either a conncected Android device or an emulator.
+* The program runs at a very slow frame rate on emulators provided by Android Studio. I suggest connecting an Android device for best results.
 
 # Project Status and Documentation
 The game is currently far from complete. Here is a brief summary of its current status.
