@@ -1,6 +1,9 @@
 /**
- * ReboundBehavior class - derived from Animation
- * Requires game.engine.Engine to build.
+ * Copyright (c) 2016 Andrew Cleland.
+ *
+ * Based on sample code by Jonathan Harbour in
+ * "Sams Teach Yourself Android Game Programming in 24 Hours"
+ * Copyright (c) 2012 by Jonathan S. Harbour
  */
 package april.bustabobble;
 import android.graphics.*;

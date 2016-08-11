@@ -1,3 +1,7 @@
+/**
+ * Copyright (c) 2016 Andrew Cleland.
+ */
+
 package april.bustabobble;
 
 import android.graphics.Bitmap;
@@ -8,9 +12,7 @@ import game.engine.Engine;
 import game.engine.Vec2;
 import game.engine.Texture;
 
-/**
- * Created by Andronius on 7/20/16.
- */
+
 public class Bobble extends game.engine.Sprite {
     private static int RADIUS;
     private int color;

@@ -1,8 +1,7 @@
-package april.bustabobble;
 /**
  * Copyright (c) 2016 Andrew Cleland.
  */
-
+package april.bustabobble;
 import java.util.Random;
 import android.graphics.*;
 import game.engine.*;

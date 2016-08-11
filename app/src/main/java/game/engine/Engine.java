@@ -1,7 +1,8 @@
 /**
  * Copyright (c) 2016 Andrew Cleland
- * Only minor changes to engine source code written for
- * Teach Yourself Android 4.0 Game Programming in 24 Hours
+ *
+ * Only minor changes to engine source code written in
+ * "Sams Teach Yourself Android 4.0 Game Programming in 24 Hours"
  * Copyright (c)2012 by Jonathan S. Harbour
  */
 

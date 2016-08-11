@@ -1,5 +1,6 @@
 /** 
  * SpinAnimation Class
+ *  * Copyright (c) 2012 by Jonathan S. Harbour
  */
 package game.engine;
 

@@ -1,3 +1,6 @@
+/**
+ * Copyright (c) 2016 Andrew Cleland.
+ */
 package april.bustabobble;
 import android.graphics.Color;
 

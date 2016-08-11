@@ -1,8 +1,10 @@
-package april.bustabobble;
-import java.util.Random;
 /**
  * Copyright (c) 2016 Andrew Cleland.
  */
+
+package april.bustabobble;
+import java.util.Random;
+
 public enum BobbleColor {
     RED(Colors.TRANS_RED),
     ORANGE(Colors.TRANS_ORANGE),

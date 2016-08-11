@@ -1,10 +1,12 @@
-package game.engine;
+/**
+ * A 2D vector class
+ * Copyright (c) 2016 Andrew Cleland.
+ */
 
+package game.engine;
 import android.graphics.Point;
 
-/**
- * Created by Andronius on 7/30/16.
- */
+
 public class Vec2 {
     public float x;
     public float y;

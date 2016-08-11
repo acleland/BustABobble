@@ -1,3 +1,6 @@
+/**
+ * Copyright (c) 2016 Andrew Cleland.
+ */
 package april.bustabobble;
 
 import android.graphics.Canvas;
@@ -7,9 +10,7 @@ import android.graphics.RectF;
 
 import game.engine.Vec2;
 
-/**
- * Created by Andronius on 7/30/16.
- */
+
 public class Cannon {
     public static int RADIUS;
     public Vec2 center;

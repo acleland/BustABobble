@@ -1,6 +1,7 @@
 /** 
  * Animation Class 
  * Requires game.engine.Engine to build.
+ *  * Copyright (c) 2012 by Jonathan S. Harbour
  */
 package game.engine;
 
