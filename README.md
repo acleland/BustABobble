@@ -1,6 +1,10 @@
 # BustABobble
 An open-source adaptation of a classic Japanese puzzle game for Android.
+
 Copyright (c) 2016 Andrew Cleland
+
+alcleland@gmail.com
+
 
 # About the game
 BustABobble is an open-source Android game project based on the game PuzzleBobble (Bust-A-Move in the United States) developed by the Taito Corporation. In the game, the player fires colored balls, called bobbles, into the game frame. Connect three or more bobbles of the same color, and they "pop", causing all bobbles below them to fall off the screen. Clear all the bobbles on the screen and you advance to the next level.
