@@ -28,12 +28,11 @@ https://github.com/acleland/BustABobble
 # Project Status and Documentation
 The game is currently far from complete. Here is a brief summary of its current status.
 * When you open the app, a checkerboard screen appears, with a black line segment at the bottom representing a cannon.
-* The bobble placed over the cannon tells you the color this already loaded and will be fire next. Another bobble below and left of the cannon shows the next color waiting to be loaded into the cannon.
+* The bobble placed over the cannon tells you the color that is already loaded and will be fired next. Another bobble below and left of the cannon shows the next color waiting to be loaded into the cannon.
 * Touch and move finger to aim the cannon.
 * Cannon fires on release of finger.
 * Bobbles ricochet off sides of the game frame and stick to the ceiling.
 * Bobbles "snap" to each other in an organized grid.
-* The 
 
 The next stage of development is to complete the logic and data structure required to detect color matches and drop the correct bobbles from the screen. Once this is done, I will create levels and scoring. 
 
