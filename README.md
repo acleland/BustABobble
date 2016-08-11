@@ -23,3 +23,7 @@ The game is currently far from complete. Here is a brief summary of its current 
 * Bobbles "snap" to each other in an organized grid.
 
 The next stage of development is to complete the logic and data structure required to detect color matches and drop the correct bobbles from the screen. Once this is done, I will create levels and scoring. 
+
+# Demo Video
+A short video demonstrating the game status as of August 10, 2016:
+https://youtu.be/b2j3L30qUNY
